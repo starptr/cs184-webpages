@@ -9,7 +9,7 @@ In this project, we implemented a 2D rasterizer and related utilities around vec
 
 To rasterize a triangle, we first find the bounding box, which is the smallest rectangular region of the sampling buffer which contains every point on or inside the triangle. By only iterating through the pixels within the bounding box of the triangle, we avoid having to iterate many more pixels than necessary. The bounding box can be well-defined using the top left and bottom right coordinates, which can be calculating by taking the minimum and maximum of all x- and y-coordinates. Then we iterate through each pixel in the bounding box. For each pixel, we check to see if it lies on the same side of all three sides of the triangle; if so, we set that pixel in the sample buffer the appropriate color. Otherwise, we do nothing with the pixel, keeping the color possibly already written to that pixel.
 
-![Rasterized Test 4](images/task1.png)
+<img src="images/task1.png" alt="Rasterized Test 4" align="middle" width="400px"/>
 Figure 1
 
 ### Part 2: Antialiasing triangles
@@ -52,7 +52,7 @@ Lastly, we need to ensure existing processes can handle the larger sampling buff
 
 To support linear and affine transformations, we use homogenous coordinates. The extra dimension allows us to compute translation while still using only matrix multiplication. Below is a rabbit wearing sunglasses.
 
-![Rabbit with sunglasses (or alternatively, a person doing a handstand)](images/task3.png)
+<img src="images/task3.png" alt="Rabbit with sunglasses (or alternatively, a person doing a handstand)" align="middle" width="400px"/>
 
 ## Section II: Sampling
 
@@ -60,13 +60,13 @@ To support linear and affine transformations, we use homogenous coordinates. The
 
 Barycentric coordinates allow us to express the closeness of a given point to each of the 3 vertices of a triangle. For each vertex, if the corresponding barycentric coordinate is 1, the point is on the vertex, and if it is 0, the point is on the side of the triangle opposite of the vertex. (A more accurate interpretation is the signed distance from the side opposite to the vertex in terms of the height of the triangle from the vertex.) Below we see an example of a gradient-textured triangle whose color at each vertex is pure red, green, or blue.
 
-![Gradient triangle with pure color vertices](images/task4-bary.png)
+<img src="images/task4-bary.png" alt="Gradient triangle with pure color vertices" align="middle" width="400px"/>
 
 A point close to a vertex will have the corresponding barycentric coordinate closer to 1, and vice versa. Between the red and blue vertex, we see a purple vertex, whose barycentric coordinate is near 0.5 for both the red and blue channels, and close to 0 for the green channel.
 
 To compute the barycentric coordinates, we construct a matrix whose columns are the homogenous coordinates of each vertex of the triangle, and matrix multiply with the homogenous coordinate of the pixel coordinate in question. This gives us a vector whose entries are the barycentric coordinate of each vertex. Taking the weighted average of each vertex's color about the barycentric coordinates, we can compute the color of the current pixel.
 
-![Gradient circle](images/task4-circle.png)
+<img src="images/task4-circle.png" alt="Gradient circle" align="middle" width="400px"/>
 
 ### Part 5: "Pixel sampling" for texture mapping
 In pixel sampling, we determine what colors to make each pixel in the displayed image by sampling in some way from the colors used in the source texture. The texture has its own "texture coordinate" system, so we use this for texture mapping by looking for the corresponding texture pixel ("texel") location to each pixel we draw, which can be done by using barycentric coordinates from known texture coordinates. This can result in non-integer texture coordinates, and so we have different ways to determine what texels to use for each pixel and how to sample from them for our final color of the pixel.
