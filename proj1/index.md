@@ -118,7 +118,7 @@ This is implemented using mipmaps that store progressively lower resolution vers
 
 We determine what the level is at a pixel by calculating the difference between texture coordinates from the current pixel to the adjacent pixels, and then using that as an estimate for the derivatives in this formula from lecture:
 
-<img src="images/levelformula.png" align="middle" width="400px"/>
+<img src="images/levelformula.PNG" align="middle" width="400px"/>
 
 From there we have three level sampling modes: L_ZERO uses level zero (the high resolution texture) for everything. L_NEAREST uses the nearest level (since our calculated result can be non-integer) at a pixel, and L_LINEAR interpolates between the closest layers as a weighted average.
 
