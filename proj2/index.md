@@ -199,11 +199,11 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p3-phong-shade.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p3-phong-shade.PNG" align="middle" width="400px"/>
         <figcaption>Phong shading (with vertex normals)</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p3-no-phong-shade.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p3-no-phong-shade.PNG" align="middle" width="400px"/>
         <figcaption>Default flat shading (without vertex normals)</figcaption>
       </td>
     </tr>
@@ -232,11 +232,11 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p4-no-flip.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p4-no-flip.PNG" align="middle" width="400px"/>
         <figcaption>No flips</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p4-flip.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p4-flip.PNG" align="middle" width="400px"/>
         <figcaption>Some flips</figcaption>
       </td>
     </tr>
@@ -275,11 +275,11 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p5-no-split.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p5-no-split.PNG" align="middle" width="400px"/>
         <figcaption>No splits</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p5-split.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p5-split.PNG" align="middle" width="400px"/>
         <figcaption>Some splits</figcaption>
       </td>
     </tr>
@@ -299,11 +299,11 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p5-no-split.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p5-no-split.PNG" align="middle" width="400px"/>
         <figcaption>No flips or splits</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p5-split-and-flip.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p5-split-and-flip.PNG" align="middle" width="400px"/>
         <figcaption>Some flips and splits</figcaption>
       </td>
     </tr>
@@ -335,11 +335,11 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p5-ec-no-split.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p5-ec-no-split.PNG" align="middle" width="400px"/>
         <figcaption>No boundary splits</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p5-ec-split.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p5-ec-split.PNG" align="middle" width="400px"/>
         <figcaption>Some boundary splits</figcaption>
       </td>
     </tr>
@@ -384,33 +384,33 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p6-0-scale.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-0-scale.PNG" align="middle" width="400px"/>
         <figcaption>0 subdivisions</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p6-1-scale.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-1-scale.PNG" align="middle" width="400px"/>
         <figcaption>1 subdivision</figcaption>
       </td>
     </tr>
     <br>
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p6-2-scale.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-2-scale.PNG" align="middle" width="400px"/>
         <figcaption>2 subdivisions</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p6-3-scale.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-3-scale.PNG" align="middle" width="400px"/>
         <figcaption>3 subdivisions</figcaption>
       </td>
     </tr>
     <br>
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p6-4-scale.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-4-scale.PNG" align="middle" width="400px"/>
         <figcaption>4 subdivisions</figcaption>
       </td>
         <td>
-        <img src="images/cs184-proj2-p6-5-scale.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-5-scale.PNG" align="middle" width="400px"/>
         <figcaption>5 subdivisions</figcaption>
       </td>
     </tr>
@@ -425,11 +425,11 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p6-sharp-pre.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-sharp-pre.PNG" align="middle" width="400px"/>
         <figcaption>Modified mesh pre-subdivision</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p6-sharp-post.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-sharp-post.PNG" align="middle" width="400px"/>
         <figcaption>Modified mesh post-subdivision</figcaption>
       </td>
     </tr>
@@ -457,11 +457,11 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/cs184-proj2-p6-symmetric-pre.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-symmetric-pre.PNG" align="middle" width="400px"/>
         <figcaption>Modified mesh pre-subdivision</figcaption>
       </td>
       <td>
-        <img src="images/cs184-proj2-p6-symmetric-result.png" align="middle" width="400px"/>
+        <img src="images/cs184-proj2-p6-symmetric-result.PNG" align="middle" width="400px"/>
         <figcaption>Modified mesh post-subdivision</figcaption>
       </td>
     </tr>
