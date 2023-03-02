@@ -90,50 +90,40 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/p1-l0.png" align="middle" width="400px"/>
+        <img src="images/p1-l0-6.png" align="middle" width="400px"/>
         <figcaption>Level 0</figcaption>
       </td>
       <td>
-        <img src="images/p1-l1.png" align="middle" width="400px"/>
+        <img src="images/p1-l1-6.png" align="middle" width="400px"/>
         <figcaption>Level 1</figcaption>
       </td>
     </tr>
     <br>
     <tr align="center">
       <td>
-        <img src="images/p1-l2.png" align="middle" width="400px"/>
+        <img src="images/p1-l2-6.png" align="middle" width="400px"/>
         <figcaption>Level 2</figcaption>
       </td>
       <td>
-        <img src="images/p1-l3.png" align="middle" width="400px"/>
+        <img src="images/p1-l3-6.png" align="middle" width="400px"/>
         <figcaption>Level 3</figcaption>
       </td>
     </tr>
     <br>
     <tr align="center">
       <td>
-        <img src="images/p1-l4.png" align="middle" width="400px"/>
+        <img src="images/p1-l4-6.png" align="middle" width="400px"/>
         <figcaption>Level 4</figcaption>
       </td>
       <td>
-        <img src="images/p1-l5.png" align="middle" width="400px"/>
+        <img src="images/p1-l5-6.png" align="middle" width="400px"/>
         <figcaption>Level 5</figcaption>
       </td>
     </tr>
     <tr align="center">
       <td>
-        <img src="images/p1-l6.png" align="middle" width="400px"/>
+        <img src="images/p1-l5-6-curve.png" align="middle" width="400px"/>
         <figcaption>Level 6</figcaption>
-      </td>
-      <td>
-        <img src="images/p1-l7.png" align="middle" width="400px"/>
-        <figcaption>Level 7</figcaption>
-      </td>
-    </tr>
-    <tr align="center">
-      <td>
-        <img src="images/p1-l7-curve.png" align="middle" width="400px"/>
-        <figcaption>Level 7 with Curve</figcaption>
       </td>
     </tr>
   </table>
@@ -146,7 +136,7 @@
 </b>
 <p>
 	<div align="middle">
-	  <img src="images/p1-warp.png" align="middle" width="50%" />
+	  <img src="images/p1-l5-6-warp.png" align="middle" width="50%" />
 	</div>
 
 <br>
