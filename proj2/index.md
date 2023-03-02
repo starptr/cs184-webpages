@@ -145,7 +145,9 @@
   Show a screenshot of a slightly different Bezier curve by moving the original control points around and modifying the parameter \(t\) via mouse scrolling.
 </b>
 <p>
-    YO    YOUR RESPONSE GOES HERE
+	<div align="middle">
+	  <img src="images/p1-warp.png" align="middle" width="50%" />
+	</div>
 
 <br>
 
@@ -164,7 +166,9 @@
   Show a screenshot of bez/teapot.bez (not .dae) evaluated by your implementation.
 </b>
 <p>
-    YOUR RESPONSE GOES HERE
+	<div align="middle">
+	  <img src="images/p1-pot.png" align="middle" width="50%" />
+	</div>
 </p>
 <br>
 
