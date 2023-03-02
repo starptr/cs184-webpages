@@ -51,7 +51,7 @@
 
 <h2 align="middle">Overview</h2>
 <p>
-    In this project, we implemented a [...] and related functions around [...]. In the first section of this project, we implemented de Casteljau's cubic bezier curve computation algorithm for both 1-dimensional curves and 2-dimensional surfaces. In the second section of this project, we implemented [...].
+	In this project, we implemented a triangle mesh datastructure and related functions around bezier curves and loop subdivision. In the first section of this project, we implemented de Casteljau's cubic bezier curve computation algorithm for both 1-dimensional curves and 2-dimensional surfaces. In the second section of this project, we implemented area-weighted vertex normals, edge flipping, edge splitting, and loop subdivision for mesh upsampling.
 </p>
 <br>
 
@@ -451,3 +451,5 @@
     N/A
 </p>
 <br>
+
+[Link to this page](.)
