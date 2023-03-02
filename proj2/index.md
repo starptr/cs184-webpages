@@ -75,9 +75,11 @@
   Take a look at the provided .bzc files and create your own Bezier curve with 6 control points of your choosing. Use this Bezier curve for your screenshots below.
 </b>
 <!-- Example of including a single figure -->
-<div align="middle">
-  <img src="images/your_file.png" align="middle" width="50%">
-</div>
+<!--
+	<div align="middle"
+	  <img src="images/your_file.png" align="middle" width="50%"
+	</div
+-->
 <br>
 
 <b>
@@ -88,30 +90,50 @@
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/p1-l0.png" align="middle" width="400px"/>
         <figcaption>Level 0</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/p1-l1.png" align="middle" width="400px"/>
         <figcaption>Level 1</figcaption>
       </td>
     </tr>
     <br>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/p1-l2.png" align="middle" width="400px"/>
         <figcaption>Level 2</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/p1-l3.png" align="middle" width="400px"/>
         <figcaption>Level 3</figcaption>
       </td>
     </tr>
     <br>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/p1-l4.png" align="middle" width="400px"/>
         <figcaption>Level 4</figcaption>
+      </td>
+      <td>
+        <img src="images/p1-l5.png" align="middle" width="400px"/>
+        <figcaption>Level 5</figcaption>
+      </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <img src="images/p1-l6.png" align="middle" width="400px"/>
+        <figcaption>Level 6</figcaption>
+      </td>
+      <td>
+        <img src="images/p1-l7.png" align="middle" width="400px"/>
+        <figcaption>Level 7</figcaption>
+      </td>
+    </tr>
+    <tr align="center">
+      <td>
+        <img src="images/p1-l7-curve.png" align="middle" width="400px"/>
+        <figcaption>Level 7 with Curve</figcaption>
       </td>
     </tr>
   </table>
