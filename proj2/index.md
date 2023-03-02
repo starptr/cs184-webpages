@@ -123,7 +123,7 @@
     <tr align="center">
       <td>
         <img src="images/p1-l5-6-curve.png" align="middle" width="400px"/>
-        <figcaption>Level 6</figcaption>
+        <figcaption>Level 5 with Curve</figcaption>
       </td>
     </tr>
   </table>
