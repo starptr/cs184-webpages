@@ -478,4 +478,4 @@
 </p>
 <br>
 
-[Link to this page](.)
+<a href=".">Link to this page</a>
