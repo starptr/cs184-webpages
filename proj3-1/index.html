@@ -134,7 +134,7 @@ Compare rendering times on a few scenes with moderately complex geometries with 
   This heuristic works quite well and our performance immediately improved by at least tenfold.
   Although we considered other strategies such as optimically choosing 2 bounding volumes with the minimum combined volume, the algorithm for computing the exact bounding volume was O(n^3) with respect to the number of primitives, which is too expensive when a scene can contain triangles in the order of 10^6.
   In situations where one of the partitions is empty, we arbitrarily choose a primitive to be placed in the empty partition for simplicity of implementation.
-
+  <br />
   In order to take advantage of the bounded volume hierarchy, we also modified the ray intersection implementation to short-circuit whenever possible. At every bounded volume, we check if the ray intersects; in the case that it does not intersect, we immediately return since the ray cannot possibly intersect any primitive inside a bounded volume that the ray doesn't intersect.
   This process is exhautively repeated for every bounded volume that the ray does intersect and its children. However, since most scenes contains many triangles closely together, the short-circuit is able to prune out many primitives very quickly, avoiding the need to exhautively check intersections with every primitive for every ray.
 </p>
