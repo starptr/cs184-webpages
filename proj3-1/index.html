@@ -142,6 +142,10 @@ Compare rendering times on a few scenes with moderately complex geometries with 
 <h3>
   Show images with normal shading for a few large .dae files that you can only render with BVH acceleration.
 </h3>
+<p>
+  With the specified settings, these only render in reasonable times with BVH acceleration.
+  The last two images are of the same model, but with far more samples per pixel, sampling noise is significantly reduced.
+</p>
 <!-- Example of including multiple figures -->
 <!-- ./pathtracer -t 8 -s 64 -f cow_t8_s64.png ../dae/meshedit/cow.dae -->
 <!-- ./pathtracer -t 8 -f maxplanck_t8.png ../dae/meshedit/maxplanck.dae -->
@@ -178,7 +182,10 @@ Compare rendering times on a few scenes with moderately complex geometries with 
   Compare rendering times on a few scenes with moderately complex geometries with and without BVH acceleration. Present your results in a one-paragraph analysis.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+  BVH acceleration significantly improves rendering times on the order of multiple 100s, especially for scenes with many triangles.
+  For example, maxplanck.dae has about 100,000 primitives. Rendering with BVH acceleration takes about a second, but rendering without BVH acceleration takes about a hundred seconds.
+  This aligns with our expectation for how much faster BVH acceleration would be, since a routine that originally took O(n) time with respect to primitives per ray traced is now O(log n) for the average case.
+  As long as the time complexity is log n for the average case, our heuristic does not have to be perfect for our renderer to exploit the speedup.
 </p>
 <br>
 
