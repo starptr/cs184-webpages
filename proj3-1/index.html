@@ -59,27 +59,6 @@
   </table>
 </div>
 
-<p>All of the text in your write-up should be <em>in your own words</em>. If you need to add additional HTML features to this document, you can search the <a href="http://www.w3schools.com/">http://www.w3schools.com/</a> website for instructions. To edit the HTML, you can just copy and paste existing chunks and fill in the text and image file names appropriately.</p>
-<o>The website writeup is intended to be a self-contained walkthrough of the assignment: we want this to be a piece of work which showcases your understanding of relevant concepts through both mesh images as well as written explanations about what you did to complete each part of the assignment. Try to be as clear and organized as possible when writing about your own output files or extensions to the assignment. We want to understand what you've achieved and how you've done it!</p> 
-<p>If you are well-versed in web development, feel free to ditch this template and make a better looking page.</p>
-
-
-<p>Here are a few problems students have encountered in the past. Test your website on the instructional machines early!</p>
-<ul>
-<li>Your main report page should be called index.html.</li>
-<li>Be sure to include and turn in all of the other files (such as images) that are linked in your report!</li>
-<li>Use only <em>relative</em> paths to files, such as <pre>"./images/image.jpg"</pre>
-Do <em>NOT</em> use absolute paths, such as <pre>"/Users/student/Desktop/image.jpg"</pre></li>
-<li>Pay close attention to your filename extensions. Remember that on UNIX systems (such as the instructional machines), capitalization matters. <pre>.png != .jpeg != .jpg != .JPG</pre></li>
-<li>Be sure to adjust the permissions on your files so that they are world readable. For more information on this please see this tutorial: <a href="http://www.grymoire.com/Unix/Permissions.html">http://www.grymoire.com/Unix/Permissions.html</a></li>
-<li>And again, test your website on the instructional machines early!</li>
-</ul>
-
-
-<p>Here is an example of how to include a simple formula:</p>
-<p align="middle"><pre align="middle">a^2 + b^2 = c^2</pre></p>
-<p>or, alternatively, you can include an SVG image of a LaTex formula.</p>
-
 <div>
 
 <h2 align="middle">Overview</h2>
@@ -149,7 +128,15 @@ Compare rendering times on a few scenes with moderately complex geometries with 
   Walk through your BVH construction algorithm. Explain the heuristic you chose for picking the splitting point.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+  We implemented a bounded volume hierarchy tree constructor that recursively partition our iterator of primitives into two groups, unless the group is small enough to be contained as a leaf node.
+  Our heuristic for partitioning used the midpoint between the minimum coordinate and maximum coordinate along the current axis of any of the primitives' bounding boxes.
+  Then for every recursive call, we switch to a different axis uniformly.
+  This heuristic works quite well and our performance immediately improved by at least tenfold.
+  Although we considered other strategies such as optimically choosing 2 bounding volumes with the minimum combined volume, the algorithm for computing the exact bounding volume was O(n^3) with respect to the number of primitives, which is too expensive when a scene can contain triangles in the order of 10^6.
+  In situations where one of the partitions is empty, we arbitrarily choose a primitive to be placed in the empty partition for simplicity of implementation.
+
+  In order to take advantage of the bounded volume hierarchy, we also modified the ray intersection implementation to short-circuit whenever possible. At every bounded volume, we check if the ray intersects; in the case that it does not intersect, we immediately return since the ray cannot possibly intersect any primitive inside a bounded volume that the ray doesn't intersect.
+  This process is exhautively repeated for every bounded volume that the ray does intersect and its children. However, since most scenes contains many triangles closely together, the short-circuit is able to prune out many primitives very quickly, avoiding the need to exhautively check intersections with every primitive for every ray.
 </p>
 
 <h3>
