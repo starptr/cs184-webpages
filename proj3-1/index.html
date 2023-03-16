@@ -464,7 +464,11 @@ With only indirect lighting, rays directly shining into the camera from the ligh
 </div>
 <br>
 <p>
-    YOUR EXPLANATION GOES HERE
+  With max_ray_depth set to 0, we only see the light directly shining from the light source, since any reflection of a surface implies at least one bounce.
+  With max_ray_depth set to 1, the ceiling is not lit (since bouncing from the ceiling implies at least one other bounce from the light source).
+  We also see that the back wall and floor do not have a red or blue coloring, since the red or blue color from the side walls must bounce onto the back wall or floor, which requires more than one total ray bounce.
+  Between max_ray_depth set to 2 and 3, we see that max_ray_depth set to 3 is slightly brighter, but due to dimishing effects of bouncing, there is only a small difference.
+  Since the diminishing effect diminishes quickly, having max_ray_depth set to 100 is not much brighter; visually, it looks as though the difference between 2 and 3 is greater.
 </p>
 <br>
 
