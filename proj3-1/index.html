@@ -41,7 +41,7 @@
 
 <h1 align="middle">CS 184: Computer Graphics and Imaging, Spring 2023</h1>
 <h1 align="middle">Project 3-1: Path Tracer</h1>
-<h2 align="middle">YOUR NAME(S)</h2>
+<h2 align="middle">Yuto Nishida, Alvin Xu</h2>
 
 <!-- Add Website URL -->
 <h2 align="middle">Website URL: <a href="TODO">TODO</a></h2>
@@ -76,7 +76,23 @@ Show images with normal shading for a few small .dae files. -->
   Walk through the ray generation and primitive intersection parts of the rendering pipeline.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+    First, we generate the camera rays we will need to determine intersections. To do this, for a given coordinate in image space we compute its camera space equivalent, generate the ray in camera space, then transform this to world space. Converting image coordinates to camera coordinates is done by scaling the coordinates of the corners to the corresponding coordinates in cameraspace. The ray is drawn with these new coordinates, and then is converted to worldspace by multiplying the ray's direction vector by the rotation matrix.
+</p>
+<p>
+  With this ray implementation, we calculate the radiances of pixels in our view. For each pixel, the integral of radiances over the pixel to calculate this is Monte Carlo estimated by taking and averaging multiple samples, where in each one we generate a random ray to the pixel and then estimate the radiance along that ray.
+</p>
+<p>
+  Intersections with triangles are explained in the next question. Intersections with spheres are calculated using these formulas from lecture. This can give two t values since intersection with a circle can yield two points.
+  <div align="middle">
+    <table style="width:100%">
+      <tr align="center">
+        <td>
+          <img src="images/p1_formula2.PNG" align="middle" width="400px"/>
+        </td>
+      </tr>
+    </table>
+  </div>
+  The closer of the two t values that lie between our ray's min and max t is our intersection point. If neither of the two t values meet this requirement then we do not have a intersection.
 </p>
 <br>
 
@@ -84,8 +100,21 @@ Show images with normal shading for a few small .dae files. -->
   Explain the triangle intersection algorithm you implemented in your own words.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+    For triangle intersection, we use the Moller-Trumbore Algorithm from lecture.
+    <div align="middle">
+      <table style="width:100%">
+        <tr align="center">
+          <td>
+            <img src="images/p1_formula1.PNG" align="middle" width="400px"/>
+          </td>
+        </tr>
+      </table>
+    </div>
+    We plug in our values to this formula (the origin and direction of our ray, as well as the three points of the triangle). The resulting vector with three parameters can be used to verify if an intersection occurs. 
 </p>
+<p>
+  The requirements to check for this are that t is between our ray's min_t and max_t (thus a valid intersection), and that the b1 and b2 we receive are between 0 and 1, thus making our calculated b3 between 0 and 1 as well, to ensure we have valid barycentric coordinates that give an intersection point inside the triangle.
+</p> 
 <br>
 
 <h3>
@@ -96,12 +125,12 @@ Show images with normal shading for a few small .dae files. -->
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example1.dae</figcaption>
+        <img src="images/CBbunny_normalsample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example2.dae</figcaption>
+        <img src="images/CBsphere_normalsample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBspheres_lambertian.dae</figcaption>
       </td>
     </tr>
     <tr align="center">
@@ -199,7 +228,36 @@ Compare the results between uniform hemisphere sampling and lighting sampling in
   Walk through both implementations of the direct lighting function.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+    The two implementations we use are <b>uniform hemisphere sampling</b> and <b>light sampling</b>.
+</p>
+<p>
+  In <b>uniform hemisphere sampling</b>, we estimate our lighting on a point by uniformly sampling from the surrounding hemisphere. To calculate the outgoing lighting that we perceive, we approximate the reflection equation with a Monte Carlo estimator.
+</p>
+<div align="middle">
+  <table style="width:100%">
+    <tr align="center">
+      <td>
+        <img src="images/p3_formula1.png" align="middle" width="400px"/>
+        <figcaption>Reflection Equation</figcaption>
+      </td>
+      <td>
+        <img src="images/p3_formula2.PNG" align="middle" width="400px"/>
+        <figcaption>Monte Carlo Estimator</figcaption>
+      </td>
+    </tr>
+  </table>
+</div>
+<p>
+  So, we randomly pick N samples of rays from the surrounding hemisphere to our point, and after converting to worldspace we see if it intersects with a light source. If it does, then it will contribute to our direct lighting, so we add it to our summation in our above Monte Carlo estimator. Once we normalize this, we have an output that will converge to the correct result.
+</p>
+<p>
+  In <b>light sampling</b>, we take a different approach where instead of uniformly sampling from the surrounding hemisphere, we sample all the lights in our scene directly. This also lets us use point lights. 
+  </p>
+<p> 
+  We still use the Monte Carlo estimator but now use samples directly from the lights. If the ray we cast from the light doesn't intersect with any other object on the way to our point, then it will contribute to our direct lighting.
+</p>
+<p>
+  To implement this, for each of the lights in our scene, we sample it a parameter-defined number of times (or just 1 for point lights since more would be redundant), and for each generated ray we test for an intersection. If there isn't, we add the radiance of the sample to our summation for our Monte Carlo estimator just as in uniform hemisphere sampling.
 </p>
 
 <h3>
@@ -220,23 +278,23 @@ Compare the results between uniform hemisphere sampling and lighting sampling in
     <br>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example1.dae</figcaption>
+        <img src="images/CBbunny_hemispheresample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example1.dae</figcaption>
+        <img src="images/CBbunny_lightsample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae</figcaption>
       </td>
     </tr>
     <br>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example2.dae</figcaption>
+        <img src="images/CBsphere_hemispheresample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBspheres_lambertian.dae</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example2.dae</figcaption>
+        <img src="images/CBsphere_lightsample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBspheres_lambertian.dae</figcaption>
       </td>
     </tr>
     <br>
@@ -252,28 +310,28 @@ Compare the results between uniform hemisphere sampling and lighting sampling in
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="200px"/>
-        <figcaption>1 Light Ray (example1.dae)</figcaption>
+        <img src="images/bunny_1_1.png" align="middle" width="200px"/>
+        <figcaption>1 Light Ray (CBbunny.dae)</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="200px"/>
-        <figcaption>4 Light Rays (example1.dae)</figcaption>
+        <img src="images/bunny_1_4.png" align="middle" width="200px"/>
+        <figcaption>4 Light Rays (CBbunny.dae)</figcaption>
       </td>
     </tr>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="200px"/>
-        <figcaption>16 Light Rays (example1.dae)</figcaption>
+        <img src="images/bunny_1_16.png" align="middle" width="200px"/>
+        <figcaption>16 Light Rays (CBbunny.dae)</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="200px"/>
-        <figcaption>64 Light Rays (example1.dae)</figcaption>
+        <img src="images/bunny_1_64.png" align="middle" width="200px"/>
+        <figcaption>64 Light Rays (CBbunny.dae)</figcaption>
       </td>
     </tr>
   </table>
 </div>
 <p>
-    YOUR EXPLANATION GOES HERE
+    We can see that as we use more light rays, our noise in shadows decreases drastically (such as in the shadow of the rabbit). This makes sense as we are using more light rays to "draw out" that shadow.
 </p>
 <br>
 
@@ -281,7 +339,7 @@ Compare the results between uniform hemisphere sampling and lighting sampling in
   Compare the results between uniform hemisphere sampling and lighting sampling in a one-paragraph analysis.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+    We can see that overall, lighting sampling has much less noise than uniform hemisphere sampling. Though uniform hemisphere sampling will also converge to be relatively noiseless, for the same sample rate settings light sampling leads to much better results. This makes sense, as we directly sample from
 </p>
 <br>
 
@@ -445,8 +503,55 @@ Pick one scene and render it with at least 2048 samples per pixel. Show a good s
   Explain adaptive sampling. Walk through your implementation of the adaptive sampling.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+    In adaptive sampling, we adjust how many samples we take for a pixel depending on how much is needed to get rid of noise (up to our standard). This is because pixels do not all converge at the same rates - some converge faster while others converge slower. So, adaptive sampling uses this so that not every pixel uses the same high number of samples, as this may be unnecessary computation for some pixels.
 </p>
+<p>
+  In our implementation, for each sample in a pixel we've computed we keep a running total of the sum of the illumninances and the sum of the illuminances squared.
+</p>
+<div align="middle">
+  <table style="width:100%">
+    <tr align="center">
+      <td>
+        <img src="images/p5_formula1.PNG" align="middle" width="150px"/>
+      </td>
+    </tr>
+  </table>
+</div>
+<p>
+  For each pixel, after every batch of samples (defined by samplesPerBatch), we calculate the mean and variance of samples so far, and use those to calculate our "convergence" based on confidence intervals.
+</p>
+<div align="middle">
+  <table style="width:100%">
+    <tr align="center">
+      <td>
+        <img src="images/p5_formula2.PNG" align="middle" width="200px"/>
+      </td>
+    </tr>
+  </table>
+</div>
+<div align="middle">
+  <table style="width:100%">
+    <tr align="center">
+      <td>
+        <img src="images/p5_formula3.PNG" align="middle" width="150px"/>
+      </td>
+    </tr>
+  </table>
+</div>
+<p>
+  If we meet the following condition, then we stop sampling for that pixel and move to the next (to mean that our pixel is noise-free enough).
+  <div align="middle">
+    <table style="width:100%">
+      <tr align="center">
+        <td>
+          <img src="images/p5_formula4.PNG" align="middle" width="250px"/>
+        </td>
+      </tr>
+    </table>
+  </div>
+  "maxTolerance" is set by our desired tolerance but is defaulted to 0.05.
+</p>
+  
 <br>
 
 <h3>
@@ -457,22 +562,22 @@ Pick one scene and render it with at least 2048 samples per pixel. Show a good s
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>Rendered image (example1.dae)</figcaption>
+        <img src="images/bunny.png" align="middle" width="400px"/>
+        <figcaption>Rendered image (CBbunny.dae)</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>Sample rate image (example1.dae)</figcaption>
+        <img src="images/bunny_rate.png" align="middle" width="400px"/>
+        <figcaption>Sample rate image (CBbunny.dae)</figcaption>
       </td>
     </tr>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>Rendered image (example2.dae)</figcaption>
+        <img src="images/spheres.png" align="middle" width="400px"/>
+        <figcaption>Rendered image (CBspheres_lambertian.dae)</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>Sample rate image (example2.dae)</figcaption>
+        <img src="images/spheres_rate.png" align="middle" width="400px"/>
+        <figcaption>Sample rate image (CBspheres_lambertian.dae)</figcaption>
       </td>
     </tr>
   </table>
