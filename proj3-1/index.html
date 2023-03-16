@@ -397,7 +397,8 @@ You will probably want to use the instructional machines for the above renders i
 </div>
 <br>
 <p>
-YOUR EXPLANATION GOES HERE
+  We can see that adding indirect illumination significantly makes the renders brighter and more realistic.
+  With high sample rate per pixel, we can also significatly reduce sampling noise.
 </p>
 <br>
 
@@ -423,6 +424,7 @@ YOUR EXPLANATION GOES HERE
 <p>
 We can see that with only direct lighting, the ceiling (which requires at least 2 bounces since in order to bounce on the ceiling from the light source, the ray must bounce elsewhere first)
 is not lit.
+The underside of the bunny is also dark, since it is hard for light to bounce only once and light that area.
 With only indirect lighting, rays directly shining into the camera from the light source without bouncing do not appear.
 </p>
 
@@ -434,27 +436,27 @@ With only indirect lighting, rays directly shining into the camera from the ligh
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/CBbunny_prod_m0.png" align="middle" width="400px"/>
         <figcaption>max_ray_depth = 0 (CBbunny.dae)</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/CBbunny_prod_m1.png" align="middle" width="400px"/>
         <figcaption>max_ray_depth = 1 (CBbunny.dae)</figcaption>
       </td>
     </tr>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/CBbunny_prod_m2.png" align="middle" width="400px"/>
         <figcaption>max_ray_depth = 2 (CBbunny.dae)</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/CBbunny_prod_m3.png" align="middle" width="400px"/>
         <figcaption>max_ray_depth = 3 (CBbunny.dae)</figcaption>
       </td>
     </tr>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
+        <img src="images/CBbunny_prod_m100.png" align="middle" width="400px"/>
         <figcaption>max_ray_depth = 100 (CBbunny.dae)</figcaption>
       </td>
     </tr>
