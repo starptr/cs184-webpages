@@ -356,7 +356,24 @@ You will probably want to use the instructional machines for the above renders i
   Walk through your implementation of the indirect lighting function.
 </h3>
 <p>
-    YOUR RESPONSE GOES HERE
+  Our implementation of the indirect lighting function uses the one-bounce-radiance function as a subrountine.
+  Since every step of radiance (i.e. every bounce) is equivalent to a single bounce radiance, we can pretend that
+  the current ray is a single bounce from the camera and reuse the one-bounce-radiance function in our recursive function.
+  If the max ray depth, which is the number of bounces we allow, is less than 2, we do not recursively bounce the ray since
+  we only bounce at most once.
+  Furthermore, we limit the number of bounces the ray is allowed to take before it is terminated from bouncing further so that our computation is finite.
+  However, this introduces a bias in our algorithm for calculating the bounced rays, since in reality light rays do not have an arbitrary upper bound on the number of times it can bounce.
+  Thus, we also use a Russian roulette random factor at each bounce that has some small but significant probability p that the ray terminates at the current step.
+  This removes our bias.
+  Lastly, we also terminate early if the ray does not intersect the scene.
+  <br />
+  At each recursive step of a bounced ray, we take the radiance from further bounces (via recursion), and normalize it
+  by dividing by the probability that the ray does not terminate, and multiplying by the bsdf sample value, Lambert's cosine law,
+  and divide by pdf of the bsdf sample.
+  <br />
+  Overall, the combination of a hard upper limit on the number of bounces and the random termination probability
+  allows us to compute the indirect lighting radiance that terminates not only in expectation but also in guarantee,
+  and in an unbiased way.
 </p>
 <br>
 
@@ -368,12 +385,12 @@ You will probably want to use the instructional machines for the above renders i
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example1.dae</figcaption>
+        <img src="images/CBbunny_prod_direct.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae with only direct lighting</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example2.dae</figcaption>
+        <img src="images/CBbunny_prod_indirect.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae with only indirect lighting</figcaption>
       </td>
     </tr>
   </table>
