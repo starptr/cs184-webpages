@@ -338,6 +338,11 @@ You will probably want to use the instructional machines for the above renders i
   </table>
 </div>
 <br>
+<p>
+  We can see that with only direct lighting, the ceiling (which requires at least 2 bounces since in order to bounce on the ceiling from the light source, the ray must bounce elsewhere first)
+  is not lit.
+  With only indirect lighting, rays directly shining into the camera from the light source without bouncing do not appear.
+</p>
 
 <h3>
   Pick one scene and compare rendered views first with only direct illumination, then only indirect illumination. Use 1024 samples per pixel. (You will have to edit PathTracer::at_least_one_bounce_radiance(...) in your code to generate these views.)
