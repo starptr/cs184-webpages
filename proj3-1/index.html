@@ -135,12 +135,12 @@ Show images with normal shading for a few small .dae files. -->
     </tr>
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example3.dae</figcaption>
+        <img src="images/CBdragon_normalsample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBdragon.dae</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>example4.dae</figcaption>
+        <img src="images/CBgems_normalsample_64_32.png" align="middle" width="400px"/>
+        <figcaption>CBgems.dae</figcaption>
       </td>
     </tr>
   </table>
@@ -339,7 +339,7 @@ Compare the results between uniform hemisphere sampling and lighting sampling in
   Compare the results between uniform hemisphere sampling and lighting sampling in a one-paragraph analysis.
 </h3>
 <p>
-    We can see that overall, lighting sampling has much less noise than uniform hemisphere sampling. Though uniform hemisphere sampling will also converge to be relatively noiseless, for the same sample rate settings light sampling leads to much better results. This makes sense, as we directly sample from
+    We can see that overall, lighting sampling has much less noise than uniform hemisphere sampling - we can see that it is much less "grainy". Though uniform hemisphere sampling can also converge to be relatively noiseless, for the same sample rate settings light sampling leads to much better results. This makes sense, as we directly sample from the light sources, while in uniform hemisphere sampling it is likely that many of our rays do not intersect with a light source, leading to slower convergence as many more samples would be needed to converge to being able to reflect the lighting in the scene. In light sampling we only sample from lights, so we at least are only sampling from angles that can potentially lead to a contributing incoming radiance. Thus this leads to a less noisy image overall as we focus in on potentially important rays rather than averaging over many rays that could be drawn from any direction (higher variance).
 </p>
 <br>
 
@@ -525,10 +525,10 @@ Pick one scene and render it with at least 2048 samples per pixel. Show a good s
   Explain adaptive sampling. Walk through your implementation of the adaptive sampling.
 </h3>
 <p>
-    In adaptive sampling, we adjust how many samples we take for a pixel depending on how much is needed to get rid of noise (up to our standard). This is because pixels do not all converge at the same rates - some converge faster while others converge slower. So, adaptive sampling uses this so that not every pixel uses the same high number of samples, as this may be unnecessary computation for some pixels.
+    In adaptive sampling, we adjust how many samples we take for a pixel depending on how much is needed to get rid of noise (up to our standard). This is because pixels do not all converge at the same rates - some converge faster while others converge slower. So, adaptive sampling makes it so that not every pixel uses the same high number of samples, as this may be unnecessary computation for some pixels.
 </p>
 <p>
-  In our implementation, for each sample in a pixel we've computed we keep a running total of the sum of the illumninances and the sum of the illuminances squared.
+  In our implementation, for each sample in a pixel we've computed we keep a running total of the sum of the illuminances and the sum of the illuminances squared.
 </p>
 <div align="middle">
   <table style="width:100%">
