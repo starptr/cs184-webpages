@@ -518,7 +518,9 @@ With only indirect lighting, rays directly shining into the camera from the ligh
 </div>
 <br>
 <p>
-    YOUR EXPLANATION GOES HERE
+  Sampling more per pixel decreases the sampling noise. With only 1 sample, the render is quite fuzzy; with 1024 samples, the render looks very smooth.
+  Since each bounce is an estimate of the total light shining at the intersection (considering that bounces may be randomly terminated through Russian roulette), averaging a pixel over more samples smoothes out the random noise
+  that arises from the estimate.
 </p>
 <br>
 
