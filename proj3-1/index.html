@@ -385,22 +385,21 @@ You will probably want to use the instructional machines for the above renders i
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/CBbunny_prod_direct.png" align="middle" width="400px"/>
-        <figcaption>CBbunny.dae with only direct lighting</figcaption>
+        <img src="images/CBbunny_prod.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae</figcaption>
       </td>
       <td>
-        <img src="images/CBbunny_prod_indirect.png" align="middle" width="400px"/>
-        <figcaption>CBbunny.dae with only indirect lighting</figcaption>
+        <img src="images/CBsphere_prod.png" align="middle" width="400px"/>
+        <figcaption>CBspheres_lambertian.dae</figcaption>
       </td>
     </tr>
   </table>
 </div>
 <br>
 <p>
-  We can see that with only direct lighting, the ceiling (which requires at least 2 bounces since in order to bounce on the ceiling from the light source, the ray must bounce elsewhere first)
-  is not lit.
-  With only indirect lighting, rays directly shining into the camera from the light source without bouncing do not appear.
+YOUR EXPLANATION GOES HERE
 </p>
+<br>
 
 <h3>
   Pick one scene and compare rendered views first with only direct illumination, then only indirect illumination. Use 1024 samples per pixel. (You will have to edit PathTracer::at_least_one_bounce_radiance(...) in your code to generate these views.)
@@ -410,21 +409,22 @@ You will probably want to use the instructional machines for the above renders i
   <table style="width:100%">
     <tr align="center">
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>Only direct illumination (example1.dae)</figcaption>
+        <img src="images/CBbunny_prod_direct.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae with only direct illumination</figcaption>
       </td>
       <td>
-        <img src="images/your_file.png" align="middle" width="400px"/>
-        <figcaption>Only indirect illumination (example1.dae)</figcaption>
+        <img src="images/CBbunny_prod_indirect.png" align="middle" width="400px"/>
+        <figcaption>CBbunny.dae with only indirect illumination</figcaption>
       </td>
     </tr>
   </table>
 </div>
 <br>
 <p>
-    YOUR EXPLANATION GOES HERE
+We can see that with only direct lighting, the ceiling (which requires at least 2 bounces since in order to bounce on the ceiling from the light source, the ray must bounce elsewhere first)
+is not lit.
+With only indirect lighting, rays directly shining into the camera from the light source without bouncing do not appear.
 </p>
-<br>
 
 <h3>
   For CBbunny.dae, compare rendered views with max_ray_depth set to 0, 1, 2, 3, and 100 (the -m flag). Use 1024 samples per pixel.
