@@ -118,12 +118,24 @@
             In a few sentences, explain the differences between a pinhole camera model and a thin-lens camera model. 
         </b></p>
         <p>
-            Your response goes here.
+          With a pinhole camera, each pixel on the rendered image is generated from a single ray. Since only one ray can affect the appearance of a single pixel,
+          every pixel only "sees" one location in the scene, and thus the rendered image is completely in-focus. No pixel is "out of focus".
+          <br />
+          However, with a thin-lens camera model, a pixel on the rendered image is generated from potentially multiple rays. Since a ray from the scene
+          onto the lens is "bent," a given pixel may be a combination of two rays, likely with different directions. This gives it the "out of focus" blur effect
+          for pixels whose distance from the camera in the scene is far away from the focus distance.
+          
         </p>
         <br>
         <p><b>
             Show a "focus stack" where you focus at 4 visibly different depths through a scene. Make sure to include all screenshots.
         </b></p>
+        <p>
+          The bright points in this image have a bokeh effect the further they are from the focus distance.
+          In the render with the focus distance set to the back wall, the bright spot near the dragon's chin is the blurriest, since out of all 4
+          images, it is the furthest away from the focus distance. The effect can be noticed gradually along the edges between the side walls and the floor / ceiling.
+          The closer a point on the edge is to the focus distance, the sharper the edge is, and the further a point on the edge is from the focus distance, the blurrier the edge is.
+        </p>
         <div>
   <table style="width:100%">
     <tr align="center">
@@ -148,15 +160,21 @@
     </tr>
   </table>
         </div>
-        <p>
-            Your response goes here.
-        </p>
         <br>
         <p><b>
             Show a sequence of 4 pictures with visibly different aperture sizes, all focused at the same point in a scene. Make sure to include all screenshots.
         </b></p>
         <p>
-            Your response goes here.
+          The aperture size is the radius of the image, and determines the size of the sampling space for the thin lens.
+          With a larger aperture size, the bokeh effect is larger when the focus distance is fixed.
+          In all four images, the focus distance is fixed, but the aperture size increases progressively.
+          When the aperture size is 0, nothing is out of focus because any ray that doesn't pass through the center of the lens (and potentially
+          casting radiance onto another pixel) is effectively blocked. (In implementation, we don't bother casting such rays when the aperture is 0.)
+          Note that the blurriness is dirrectly correlated with both the focus distance and the aperture size; even with the largest aperture size of 1,
+          the pixels at the focus distance are sharp. This effect is noticeable along the edges of the size walls and the floor / ceiling, where the point
+          at the focus distance is sharper than the surrounding pixels.
+          Finally, we also notice that the edges of the Cornel box itself against the black background also becomes progressively blurrier with larger aperture sizes.
+        </p>
 
             <div>
 
@@ -183,7 +201,6 @@
     </tr>
   </table>
             </div>
-        </p>
         <br>
 
     </div>
