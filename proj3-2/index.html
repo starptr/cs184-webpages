@@ -16,98 +16,129 @@
 <body>
 <br />
 <h1 align="middle">Assignment 3-2: Additional Features to PathTracer</h1>
-    <h2 align="middle">Your Name</h2>
-    <h2 align="middle">(Webpage URL)</h2>
+    <h2 align="middle">Yuto Nishida, Alvin Xu</h2>
+    <h2 align="middle">Website URL: <a href=".">Here</a></h2>
 
     <div class="padded">
 
         
-        * NOTE: For this project, you will choose TWO out of the four given parts to complete. One of those parts must be Part 1 or Part 2. In other words, you can choose any combination of two parts except the pair (Part 3, Part 4).
+        <h3 align="middle">Overview</h3>
+        <p>
+          In this project we implemented the parts of mirror and glass materials to properly show their reflective/refractive behavior and depth of field to properly represent thin lens behavior and have focal distances in our camera view rather than the pinhole model of everything being in focus.
+        </p>
 
 
         <h3 align="middle">Part 1. Mirror and Glass Materials</h3>
+        <p>
+          To implement reflection, we simply transform the wo vector by reflecting it across (0, 0, 1), our normal vector. We directly use this for mirror materials since they just reflect.
+        </p>
+        <p>
+          To implement refraction, we use Snell's Law. Given the index of refraction and whether we are entering or exiting the material, we can use Snell's Law to determine the refracted direction (or determine if there is total internal reflection). 
+        </p>
+        <p>
+          To implement glass materials, we combine these two. First, if there is total internal reflection we simply use the reflection case. However, otherwise there is both reflection and refraction since it is glass, so we model this by using Schlick's approximation to coinflip whether we return the reflection or refraction given a ray.
+        </p>
+        <p>
+          An important thing to note is that all of these results were divided by the cosine of the angle to account for later multiplying by this cosine as we do not have Lambertian falloff.
+        </p>
 
         <p><b>
             Show a sequence of six images of scene `CBspheres.dae` rendered with `max_ray_depth` set to 0, 1, 2, 3, 4, 5, and 100. The other settings should be at least 64 samples per pixel and 4 samples per light. Make sure to include all screenshots.
         </b></p>
         <p>
-            Your response goes here.
+          <div align="middle">
+            <table style="width:100%">
+              <tr align="center">
+                <td>
+                  <img src="images/spheres_depth_0.PNG" align="middle" width="400px"/>
+                  <figcaption>max_ray_depth 0</figcaption>
+                </td>
+                <td>
+                  <img src="images/spheres_depth_1.PNG" align="middle" width="400px"/>
+                  <figcaption>max_ray_depth 1</figcaption>
+                </td>
+                <td>
+                  <img src="images/spheres_depth_2.PNG" align="middle" width="400px"/>
+                  <figcaption>max_ray_depth 2</figcaption>
+                </td>
+              </tr>
+              <tr align="center">
+                <td>
+                  <img src="images/spheres_depth_3.PNG" align="middle" width="400px"/>
+                  <figcaption>max_ray_depth 3</figcaption>
+                </td>
+                <td>
+                  <img src="images/spheres_depth_4.PNG" align="middle" width="400px"/>
+                  <figcaption>max_ray_depth 4</figcaption>
+                </td>
+                <td>
+                  <img src="images/spheres_depth_5.PNG" align="middle" width="400px"/>
+                  <figcaption>max_ray_depth 5</figcaption>
+                </td>
+              </tr>
+              <tr align="center">
+                <td>
+                  <img src="images/spheres_depth_100.PNG" align="middle" width="400px"/>
+                  <figcaption>max_ray_depth 100</figcaption>
+                </td>
+              </tr>
+            </table>
+          </div>
         </p>
         <br>
         <p><b>
             Point out the new multibounce effects that appear in each image. 
         </b></p>
         <p>
-            Your response goes here.
+            At depth 0, we only see the area light.
+        </p>
+        <p>
+            At depth 1, we see the walls as well as the spheres, though the ceiling is still dark. The spheres are still generally black, though we can see light in a small area along the top of the spheres.
+        </p>
+        <p>
+          At depth 2, the ceiling is lit now. The left sphere has visible reflections off of it (though the ceiling and other sphere in the reflection are dark), and the right sphere has very faint reflections but is still mostly black. The shadows of the spheres are also a little lighter.
+        </p>
+        <p>
+          At depth 3, the ceiling in the reflection of the left sphere is lit. The bottom part of the sphere is also brighter than before. The biggest change is the right sphere is no longer black - it is cleared up and we can see the refraction of the scene in it, as well as a bright spot below it. The shadows under the spheres get a little lighter as well.
+        </p>
+        <p>
+          At depth 4, the reflection in the left sphere of the right sphere is cleared up and is no longer black. The bottom part of the sphere is also brighter than before. On the right sphere, the bottom is more illuminated and "bleeds" into the sphere. This right sphere is a little brighter overall. We can also see a lit spot on the wall to the right of that sphere. The shadows under the spheres get a little lighter as well.
+        </p>
+        <p>
+          At depth 5, the reflection in the left sphere of the right sphere is a little brighter. The bottom part of this sphere and the shadows of both spheres continue to get a little lighter. The right sphere is also brighter overall.
+        </p>
+        <p>
+          At depth 100, the scene is in general much brighter. In the left sphere, we can see the reflection of the ceiling and the other sphere is brighter, as well as the bottom part of the sphere. The shadows of both spheres are brighter. Areas like the ceiling of the whole scene is noticeably brighter along the edges.
         </p>
         <br>
         <p><b>
             Explain how these bounce numbers relate to the particular effects that appear. Make sure to include all screenshots.
         </b></p>
         <p>
-            Your response goes here.
+          All screenshots are above. The particular effects were described in the previous questions, so here we will discuss how the bounce number led to those effects.
         </p>
-        <br>
-
-
-        <h3 align="middle">Part 2. Microfacet Material</h3>
-        <p><b>
-            Show a screenshot sequence of 4 images of scene `CBdragon_microfacet_au.dae` rendered with $\alpha$ set to 0.005, 0.05, 0.25 and 0.5. The other settings should be at least 128 samples per pixel and 1 samples per light. The number of bounces should be at least 5. Describe the differences between different images. Note that, to change the $\alpha$, just open the .dae file and search for `microfacet`.
-        </b></p>
         <p>
-            Your response goes here.
+            At depth 0, since we have no bounces we only see light straight from the area light.
         </p>
-        <br>
-        <p><b>
-            Show two images of scene `CBbunny_microfacet_cu.dae` rendered using cosine hemisphere sampling (default) and your importance sampling. The sampling rate should be fixed at 64 samples per pixel and 1 samples per light. The number of bounces should be at least 5. Briefly discuss their difference.
-        </b></p>
         <p>
-            Your response goes here.
+          At depth 1, the walls become lit as we get one bounce from the area light to the wall to the camera. However, the ceiling is not lit as the area light is in the ceiling so it cannot bounce off the ceiling directly in one bounce. We can see the sphere structures since they physically block the light bounces from the wall behind them, though the reflective/refractive contents are not visible as those will need more bounces. We do see the glare though, as this comes from the light reflecting off the spheres once straight to the camera.
         </p>
-        <br>
-        <p><b>
-            Show at least one image with some other conductor material, replacing `eta` and `k`. Note that you should look up values for real data rather than modifying them arbitrarily. Tell us what kind of material your parameters correspond to. 
-        </b></p>
         <p>
-            Your response goes here.
+          At depth 2, the ceiling is now lit as a path can be traced in two bounces of light -> any object -> ceiling -> camera. The left sphere has visible reflections now as we can trace a path of light -> any object -> sphere -> camera. However, lighting up the ceiling or the refractive sphere inside that scene would need more bounces. The right sphere has very faint reflections as we can trace the same path, but this ball is glass and is mostly refractive so we barely see the effect. The shadows of the spheres get lighter simply due to more complex paths being able to contribute light there, unrelated to reflective/refractive properties - this will continue to be the case in higher depths for the same reason so we won't discuss this improvement anymore.
         </p>
-        <br>
-        
-        
-        
-
-        <h3 align="middle">Part 3. Environment Lightl</h3>
-        <b>Pick one *.exr* file to use for all subparts here. Include a converted *.jpg* of it in your website so we know what map you are using.</b>
-        
-        <p><b>
-            In a few sentences, explain the ideas behind environment lighting (i.e. why we do it/how it works).
-        </b></p>
         <p>
-            Your response goes here.
+          At depth 3, the ceiling in the reflection of the left sphere is now lit as we can trace a path of light -> any object -> ceiling -> sphere -> camera. The bottom part of the sphere being brighter is lighter for the same reason as the shadows becoming lighter so we won't touch on that anymore. The big change of the right sphere no longer being black is because we can have three bounces of light -> any object -> enter sphere refraction -> exit sphere refraction -> camera. This allows us to now see the refractive properties of the sphere. The bright spot underneath the sphere can be attributed to the path of light -> enter sphere -> exit sphere -> floor -> camera.
         </p>
-        <br>
-        <p><b>
-            Show the *probability_debug.png* file for the *.exr* file you are using, generated using the `save_probability_debug()` helper function after initializing your probability distributions.
-        </b></p>
         <p>
-            Your response goes here.
+          At depth 4, the reflection in the left sphere of the right sphere is cleared up as we can now see the refractive properties of it through the path of light -> any object -> enter refractive sphere -> exit refractive sphere -> left sphere -> camera. On the right sphere, the bottom is more illuminated as we get the path of light -> enter sphere -> exit sphere -> floor -> sphere reflection -> camera. We get the small focused lit spot on the right due to the bounces of light -> left sphere -> enter right sphere -> exit right sphere -> wall spot -> camera.
         </p>
-        <br>
-        <p><b>
-            Use the `bunny_unlit.dae` scene and your environment map *.exr* file and render two pictures, one with uniform sampling and one with importance sampling. Use 4 samples per pixel and 64 samples per light in each. Compare noise levels. Make sure to include all screenshots.
-        </b></p>
         <p>
-            Your response goes here.
+          At depth 5, the changes are generally just the scene being brighter. This can be attributed to more complex paths contributing more light to points in the scene. For instance, the right sphere is getting brighter because there are more light paths entering and exiting this sphere but with more bounces beforehand, such as light -> one wall -> another wall -> another wall -> enter sphere -> exit sphere -> camera.
         </p>
-        <br>
-        <p><b>
-            Use a different image (if you did part 2, we recommend `bunny_microfacet_cu_unlit.dae`) and your environment map *.exr* file and render two pictures, one with uniform sampling and one with importance sampling. Use 4 samples per pixel and 64 samples per light in each. Compare noise levels. Make sure to include all screenshots.
-        </b></p>
         <p>
-            Your response goes here.
+          At depth 100, the scene is just brighter due to the same reasoning as above. There are many many paths contributing more light to each point in the scene, so things like the ceiling and the right sphere get more lighting.
         </p>
         <br>
-
 
 
         <h3 align="middle">Part 4. Depth of Field</h3>
