@@ -155,6 +155,15 @@
           However, with a thin-lens camera model, a pixel on the rendered image is generated from potentially multiple rays. Since a ray from the scene
           onto the lens is "bent," a given pixel may be a combination of two rays, likely with different directions. This gives it the "out of focus" blur effect
           for pixels whose distance from the camera in the scene is far away from the focus distance.
+          <br />
+          To implement thin-lens, we first convert the coordinate of the pixel in the rendered image to a 3D vector in the camera space,
+          which represents the reverse direction of the incoming light that colors this pixel.
+          By computing the intersection of this vector with the plane of focus, we can find the point at which the
+          "blue ray" from the thin-lens also intersects. We randomly choose a point on the thin-lens, and the vector from this
+          chosen point to the focus point is the "blue ray". We need the "blue ray" because the thin-lens bends the radiance
+          from the "blue ray" onto the same point as the current pixel, by definition.
+          Finally, we take both the originating point of the "blue ray" and the direction, convert them to world coordinates, and return
+          these values as a ray from the function so that the renderer can use them to compute the effect of the thin-lens.
           
         </p>
         <br>
@@ -235,6 +244,12 @@
         <br>
 
     </div>
+
+    <h3>Partnership</h3>
+    <p>
+      To complete this project we first looked at the four tasks and considered which parts were the most interesting to us.
+      Alvin completed Part 1 and Yuto complete Part 4.
+    </p>
 </body>
 </html>
 
