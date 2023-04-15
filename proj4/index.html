@@ -74,7 +74,12 @@
 
   <div>
     <h2 align="middle">Overview</h2>
-    <p>Give a high-level overview of what you implemented in this project. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the project.</p>
+    <p>
+		In this project we built a simulation engine for cloths. There were various parts to this, such as setting up the physical masses and springs model of a cloth, programming the physical simulation, programming collisions with other objects and with itself, as well as programming shader programs in GLSL.
+	</p>
+	<p>
+		Interesting parts to us was how to physically model a cloth for the purposes of physics as well as the shader program part at the end, since that allowed us to really work with things like OpenGL programming.
+	</p>
   </div>
 
   <a href="https://cs184.eecs.berkeley.edu/sp23/docs/proj4-part-1">
@@ -89,14 +94,10 @@
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/t1-zoomed-in_p2.png" align="middle" width="300vw" />
+            <img src="images/proj4_p1.1.PNG" align="middle" width="500vw" />
           </td>
           <td>
-            <img src="images/t1-init_p2.png" align="middle" width="300vw" />
-            <figcaption>Initial configuration ($\text{ks} = 5,000$)</figcaption>
-          </td>
-          <td>
-            <img src="images/t1-zoomed-out_p2.png" align="middle" width="300vw" />
+            <img src="images/proj4_p1.1.2.PNG" align="middle" width="500vw" />
           </td>
           <td>
         </tr>
@@ -113,19 +114,19 @@
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/t1-no_shear.png" align="middle" width="500px" />
+            <img src="images/proj4_p1.2.png" align="middle" width="500px" />
             <figcaption>No shearing constraints</figcaption>
           </td>
         </tr>
         <tr align="center">
           <td>
-            <img src="images/t1-only_shear.png" align="middle" width="500px" />
+            <img src="images/proj4_p1.3.png" align="middle" width="500px" />
             <figcaption>Only shearing constraints</figcaption>
           </td>
         </tr>
         <tr align="center">
           <td>
-            <img src="images/t1-all.png" align="middle" width="500px" />
+            <img src="images/proj4_p1.1.2.png" align="middle" width="500px" />
             <figcaption>All constraints</figcaption>
           </td>
         </tr>
@@ -393,8 +394,11 @@
     </b></blockquote>
 
     <p>
-      TODO
+      A shader program is written to run parallelized on the GPU, allowing for faster execution of parts across the graphics pipeline than would be previously possible by simply running on the CPU. This works by making them isolated programs that can thus be run in parallel, blackboxed as taking in an input and outputting something that other things can potentially use.
     </p>
+	<p>
+		There are two parts that make this up as we use it in this project: A <b>vertex shader</b> deals with the calculations of transformations on the vertices, such as modifying their position, and outputs a final position of the vertex as well as outputting calculated values that will be used by a fragment shader. The <b>fragment shader</b> takes these inputs and does calculations that then result in outputting a color, such as calculating and accounting for how it is affected by lighting and material situations. We combine these two parts for a shader program, linking them so that the output of the vertex shader is used as input for a fragment shader.
+	</p>
 
 
     <blockquote><b>
@@ -403,29 +407,33 @@
     </b></blockquote>
 
     <p>
-      TODO
+      The Blinn-Phong shading model works by combining three components for lighting. First is ambient light, which is just a constant color to fill in shadows. The second is diffuse light, which depends on angle of incidence from the light source upon the surface and distance, but notably does not depend on viewing angle or distance. Third is specular light, which is the "shininess" highlights that are dependent on view direction, like bright spots from the mirror reflection direction. These three are added together with this formula to get the final intensities:
     </p>
+
+	<div align="middle">
+		<img src="images/proj4_p5-phong-equation.PNG" align="middle" width="700px" />
+	</div>
 
     <div align="middle">
       <table style="width:100%">
         <tr align="center">
           <td>
-              <img src="images/t5-blinn-phong-ambient.png" align="middle" width="400px" />
+              <img src="images/proj4_p5-phong-ambient.PNG" align="middle" width="400px" />
               <figcaption>Ambient component only</figcaption>
               
           </td>
           <td>
-              <img src="images/t5-blinn-phong-diffuse.png" align="middle" width="400px" />
+              <img src="images/proj4_p5-phong-diffuse.PNG" align="middle" width="400px" />
               <figcaption>Diffuse component only</figcaption>
           </td>
         </tr>
         <tr align="center">
           <td>
-              <img src="images/t5-blinn-phong-specular.png" align="middle" width="400px" />
+              <img src="images/proj4_p5-phong-specular.PNG" align="middle" width="400px" />
               <figcaption>Specular component only</figcaption>
           </td>
           <td>
-              <img src="images/t5-blinn-phong-all.png" align="middle" width="400px" />
+              <img src="images/proj4_p5-phong-entire.PNG" align="middle" width="400px" />
               <figcaption>Complete Blinn-Phong model</figcaption>
           </td>
         </tr>
@@ -438,7 +446,14 @@
     </b></blockquote>
 
     <div align="middle">
-      <img src="images/t5-custom-texture.png" align="middle" width="100%" />
+		<tr align="center">
+			<td>
+				<img src="images/proj4_p5-custom-texture.PNG" align="middle" width="400px" />
+			</td>
+			<td>
+				<img src="images/proj4_p5-custom-texture-fallen.PNG" align="middle" width="400px" />
+			</td>
+		  </tr>
     </div>
 
 
@@ -452,36 +467,90 @@
     Compare how your the two shaders react to the sphere by changing the sphere mesh's coarseness by using <code>-o 16 -a 16</code> and then <code>-o 128 -a 128</code>.
     </b></blockquote>
 
+	<p>
+		These screenshots are taken using texture_4. The values for displacement mapping are dramatized in order to better showcase the differences in these images.
+	</p>
+
     <div align="middle">
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/t5-bump-mapping-cloth.png" align="middle" width="400vw" />
+            <img src="images/proj4-p5-bump-cloth.PNG" align="middle" width="400vw" />
             <figcaption>Bump Mapping on the Cloth</figcaption>
           </td>
           <td>
-            <img src="images/t5-bump-mapping-sphere.png" align="middle" width="400vw" />
+            <img src="images/proj4-p5-bump-sphere.PNG" align="middle" width="400vw" />
             <figcaption>Bump Mapping on the Sphere</figcaption>
           </td>
           <td>
         </tr>
         <tr align="center">
           <td>
-            <img src="images/t5-displacement-mapping-sphere.png" align="middle" width="400vw" />
+            <img src="images/proj4-p5-displacement-cloth.PNG" align="middle" width="400vw" />
+            <figcaption>Displacement Mapping on the Cloth</figcaption>
+          </td>
+          <td>
+            <img src="images/proj4-p5-displacement-sphere.PNG" align="middle" width="400vw" />
             <figcaption>Displacement Mapping on the Sphere</figcaption>
           </td>
           <td>
-            <img src="images/t5-displacement-mapping-sphere-2.png" align="middle" width="400vw" />
-            <figcaption>Displacement Mapping on the Sphere (coarser mesh)</figcaption>
-          </td>
-          <td>
         </tr>
+		<tr align="center">
+			<td>
+			  <img src="images/proj4-p5-bump-cloth-16.PNG" align="middle" width="400vw" />
+			  <figcaption>Bump Mapping on the Cloth (Coarseness 16)</figcaption>
+			</td>
+			<td>
+			  <img src="images/proj4-p5-bump-sphere-16.PNG" align="middle" width="400vw" />
+			  <figcaption>Bump Mapping on the Sphere (Coarseness 16)</figcaption>
+			</td>
+			<td>
+		  </tr>
+		  <tr align="center">
+			<td>
+			  <img src="images/proj4-p5-bump-cloth-128.PNG" align="middle" width="400vw" />
+			  <figcaption>Bump Mapping on the Cloth (Coarseness 128)</figcaption>
+			</td>
+			<td>
+			  <img src="images/proj4-p5-bump-sphere-128.PNG" align="middle" width="400vw" />
+			  <figcaption>Bump Mapping on the Sphere (Coarseness 128)</figcaption>
+			</td>
+			<td>
+		  </tr>
+		  <tr align="center">
+			<td>
+			  <img src="images/proj4-p5-displacement-cloth-16.PNG" align="middle" width="400vw" />
+			  <figcaption>Displacement Mapping on the Cloth (Coarseness 16)</figcaption>
+			</td>
+			<td>
+			  <img src="images/proj4-p5-displacement-sphere-16.PNG" align="middle" width="400vw" />
+			  <figcaption>Displacement Mapping on the Sphere (Coarseness 16)</figcaption>
+			</td>
+			<td>
+		  </tr>
+		  <tr align="center">
+			<td>
+			  <img src="images/proj4-p5-displacement-cloth-128.PNG" align="middle" width="400vw" />
+			  <figcaption>Displacement Mapping on the Cloth (Coarseness 128)</figcaption>
+			</td>
+			<td>
+			  <img src="images/proj4-p5-displacement-sphere-128.PNG" align="middle" width="400vw" />
+			  <figcaption>Displacement Mapping on the Sphere (Coarseness 128)</figcaption>
+			</td>
+			<td>
+		  </tr>
       </table>
     </div>
 
     <p>
-      TODO
+      In bump mapping, we give the illusion of texture and bumps on the object by modifying the normal vector using our TBN matrix. We can see that this works on our images, giving the checkerboard pattern that seems like it has depth to it.
     </p>
+	<p>
+		In displacement mapping, we take this further by additionally physically modifying the position of the vertices based on our height map. This means we can physically see some differences in positions. Within our renders, we can see that it looks like a more realistic amount of depth, and also ends up being less smooth as there are physical vertex position changes.
+	</p>
+	<p>
+		When we change the coarseness, we notice a couple of changes in how these shaders are rendered on the sphere. Bump mapping has less noticeable differences, but we can see that the edge of the sphere becomes smoother, generally meaning that our mesh geometry is a little smoother. In displacement mapping we see a much more noticeable difference as the edges become much rougher, showing clear indentation patterns and less smooth.
+	</p>
 
 
     <blockquote><b>
@@ -492,11 +561,11 @@
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/t5-mirror-shader-cloth.png" align="middle" width="400vw" />
+            <img src="images/proj4_p5-mirror-both.PNG" align="middle" width="400vw" />
             <figcaption>Mirror Shader on the Cloth</figcaption>
           </td>
           <td>
-            <img src="images/t5-mirror-shader-sphere.png" align="middle" width="400vw" />
+            <img src="images/proj4_p5-mirror-ball.PNG" align="middle" width="400vw" />
             <figcaption>Mirror Shader on the Sphere</figcaption>
           </td>
           <td>
@@ -505,50 +574,14 @@
     </div>
 
 
-    <blockquote><b>
-    Explain what you did in your custom shader, if you made one.
-    </b></blockquote>
-
-    <p>
-      TODO
-    </p>
-
-
-
   <h2 align="middle">Contributions</h2>
   <p>
-    Partner A worked on TODO.
+    Alvin worked on parts 1 and 5.
   </p>
   <br />
   <p>
-    Partner B worked on TODO.
+    Yuto worked on parts 2, 3, and 4.
   </p>
-
-
-
-  <h2 align="middle">Mesh Competition Extra Credit (optional)</h2>
-  <blockquote><b>
-    The final (optional) part for the mesh competition is where you have the opportunity to be creative and individual, 
-    so be sure to provide a good description of what you were going for, what you did, and how you did it.
-  </b></blockquote>
-
-  <p>
-    N/A
-  </p>
-
-
-
-  <h2 align="middle">Extra Credit (optional)</h2>
-    <blockquote><b>
-    If you implemented any additional technical features for the cloth simulation, 
-    clearly describe what you did and provide screenshots that illustrate your work. 
-    If it is an improvement compared to something already existing on the cloth simulation, 
-    compare and contrast them both in words and in images.
-    </b></blockquote>
-
-    <p>
-      N/A
-    </p>
 
 </body>
 </html>
