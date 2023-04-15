@@ -145,8 +145,26 @@
     </b></blockquote>
 
     <p>
-      TODO
+      A very high ks spring constant such as 500,000 N/m results in very "elastic" springs
+      that tend to try to return to its normal length. There is minimal "bouncing" from
+      the start to the resting state of the cloth. With a low ks spring constant, the
+      cloth tends to "bounce" more, and takes longer to come to rest.
     </p>
+    <div align="middle">
+      <table style="width:100%">
+        <tr align="center">
+          <td>
+            <img src="images/part2-ks-500000.png" align="middle" width="400vw" />
+            <figcaption>ks set to 500,000 N/m</figcaption>
+          </td>
+          <td>
+            <img src="images/part2-ks-500.png" align="middle" width="400vw" />
+            <figcaption>ks set to 500 N/m</figcaption>
+          </td>
+          <td>
+        </tr>
+      </table>
+    </div>
 
 
     <blockquote><b>
@@ -156,8 +174,29 @@
     </b></blockquote>
 
     <p>
-      TODO
+      A very low density such as 1 g/cm^2 results in a behavior similar to setting the
+      spring constant to a very high value. Likewise, a very high density such as 200 g/cm^2
+      results in a behavior similar to setting the spring constant to a very low value.
+      This matches our expectations, since a low density makes it easier for springs
+      to move the point masses, allowing the same springs to keep nearer to its
+      original shape easier. Likewise, a high density makes it harder for springs to
+      move the point masses, making the same springs struggle to keep its original shape.
     </p>
+    <div align="middle">
+      <table style="width:100%">
+        <tr align="center">
+          <td>
+            <img src="images/part2-density-1.png" align="middle" width="400vw" />
+            <figcaption>density set to 1 g/cm^2</figcaption>
+          </td>
+          <td>
+            <img src="images/part2-density-200.png" align="middle" width="400vw" />
+            <figcaption>density set to 200 g/cm^2</figcaption>
+          </td>
+          <td>
+        </tr>
+      </table>
+    </div>
     
     
     <blockquote><b>
@@ -167,7 +206,12 @@
     </b></blockquote>
 
     <p>
-      TODO
+      A low damping value makes it difficult for the spring to converge to
+      the stable equilibrium resting state. A high damping value makes it very
+      easy for the spring to converge to the stable equilibrium resting state.
+      This matches our expectations, since a low damping value means that energy
+      does not dissipate as easily, whereas a high damping value means that energy
+      dissipates very quickly.
     </p>
 
 
@@ -182,12 +226,12 @@
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/t2-interesting-difference1.png" align="middle" width="400vw" />
-            <figcaption>Default Parameters</figcaption>
+            <img src="images/part2-damping-high.gif" align="middle" width="400vw" />
+            <figcaption>Damping set to 100%</figcaption>
           </td>
           <td>
-            <img src="images/t2-interesting-difference2.png" align="middle" width="400vw" />
-            <figcaption>Default Parameters</figcaption>
+            <img src="images/part2-damping-low.gif" align="middle" width="400vw" />
+            <figcaption>Damping set to 0%</figcaption>
           </td>
           <td>
         </tr>
@@ -195,7 +239,10 @@
     </div>
   
     <p>
-      TODO
+      The converging rate of the damped vs undamped cloth is different.
+      A fully damped cloth immediately converges, whereas the undamped cloth
+      takes longer to converge. However, it still loses energy due to floating
+      point errors and integration approximations.
     </p>
 
 
@@ -205,7 +252,7 @@
     </b></blockquote>
 
     <div align="middle">
-      <img src="images/t2-shaded-cloth-resting-p4.png" align="middle" width="100%" />
+      <img src="images/part2-pinned4.png" align="middle" width="100%" />
     </div>
 
 
@@ -222,15 +269,15 @@
       <table style="width:100%">
         <tr align="center">
           <td>
-            <img src="images/t3-ks-500.png" align="middle" width="300vw" />
+            <img src="images/part3-ks-500.png" align="middle" width="300vw" />
             <figcaption>$\text{ks} = 500$</figcaption>
           </td>
           <td>
-            <img src="images/t3-ks-5000.png" align="middle" width="300vw" />
+            <img src="images/part3-ks-500.png" align="middle" width="300vw" />
             <figcaption>Initial configuration ($\text{ks} = 5,000$)</figcaption>
           </td>
           <td>
-            <img src="images/t3-ks-50000.png" align="middle" width="300vw" />
+            <img src="images/part3-ks-50000.png" align="middle" width="300vw" />
             <figcaption>$\text{ks} = 50,000$</figcaption>
           </td>
           <td>
@@ -244,7 +291,11 @@
     </b></blockquote>
 
     <p>
-      TODO
+      The lower spring constant make the cloth wrap around the sphere more tightly,
+      whereas the higher spring constant makes the cloth almost float over the sphere.
+      This matches with our expectations, since a higher spring constants means
+      the cloth tends to stick to its original shape better, and the lower spring
+      constant means it is easier for the cloth to deform its shape.
     </p>
 
 
@@ -255,7 +306,7 @@
     </b></blockquote>
 
     <div align="middle">
-      <img src="images/t3-shaded-cloth-at-rest.png" align="middle" width="100%" />
+      <img src="images/part3-plane.png" align="middle" width="100%" />
     </div>
 
 
